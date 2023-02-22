@@ -1,0 +1,126 @@
+////////////////////////////////////////////////////////////////////////
+// L4: Strings
+////////////////////////////////////////////////////////////////////////
+//
+// Andrey Perunov
+// st81049
+// Variation 5
+//
+////////////////////////////////////////////////////////////////////////
+// Task formulation
+////////////////////////////////////////////////////////////////////////
+//
+// Validate the input as a C++ identifier	
+//
+////////////////////////////////////////////////////////////////////////
+// Algorithm
+////////////////////////////////////////////////////////////////////////
+//
+// 
+// 
+// 
+// 
+// 
+// 
+// 
+// 
+// 
+//  
+////////////////////////////////////////////////////////////////////////
+
+#include <iostream>
+#include <string>
+#include <regex>
+
+using namespace std;
+
+int main() {
+  string s;
+  
+  cout << endl << "\033[1;36m-----------------------------------------------------------\033[0m" << endl;
+  cout << "\033[1;36mThis program validates the input as a C++ identifier.\033[0m" << endl;
+  cout << "\033[1;36m-----------------------------------------------------------\033[0m" << endl << endl;
+
+  cout << "Enter the string: " << endl << endl ;
+
+  getline(cin, s);
+  cout << endl;
+
+  regex rules {"[a-zA-Z][a-zA-Z0-9_]*"};
+
+  if (regex_match(s, rules))
+    cout << "String '" << s << "' is valid C++ identifier." << endl << endl;
+  else {
+    cout << "String '" << s << "' is invalid C++ identifier." << endl << endl;
+  }    
+}
+
+////////////////////////////////////////////////////////////////////////
+// Testing
+////////////////////////////////////////////////////////////////////////
+//
+// Case 1:
+//   Input: 
+//   Output: 
+//   Expected: 
+//   Result: 
+//
+// Case 2: 
+//   Input: 
+//   Output: 
+//   Expected: 
+//   Result: 
+//
+// Case 3: 
+//   Input: 
+//   Output: 
+//   Expected: 
+//   Result: 
+//
+// Case 4: 
+//   Input: 
+//   Output: 
+//   Expected: 
+//   Result: 
+//
+// Case 5: 
+//   Input: 
+//   Output: 
+//   Expected: 
+//   Result: 
+//
+// Case 6: 
+//   Input: 
+//   Output: 
+//   Expected: 
+//   Result: 
+//
+// Case 7: 
+//   Input: 
+//   Output: 
+//   Expected: 
+//   Result: 
+//
+// Case 8: 
+//   Input: 
+//   Output: 
+//   Expected: 
+//   Result: 
+//
+// Case 9: 
+//   Input: 
+//   Output: 
+//   Expected: 
+//   Result: 
+//
+////////////////////////////////////////////////////////////////////////
+// Concluding remarks
+////////////////////////////////////////////////////////////////////////
+// 
+// 
+// 
+// 
+// 
+// 
+//
+////////////////////////////////////////////////////////////////////////
