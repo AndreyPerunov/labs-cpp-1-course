@@ -99,44 +99,10 @@ int main() {
 //   Expected: dlroW olleH
 //   Result: PASS
 //
-// Case 5: Overflow
-//   Input: 
-//   Output: 
-//   Expected: 
-//   Result: 
-//
-// Case 6: 
-//   Input: 
-//   Output: 
-//   Expected: 
-//   Result: 
-//
-// Case 7: 
-//   Input: 
-//   Output: 
-//   Expected: 
-//   Result: 
-//
-// Case 8: 
-//   Input: 
-//   Output: 
-//   Expected: 
-//   Result: 
-//
-// Case 9: 
-//   Input: 
-//   Output: 
-//   Expected: 
-//   Result: 
-//
 ////////////////////////////////////////////////////////////////////////
 // Concluding remarks
 ////////////////////////////////////////////////////////////////////////
 // 
-// 
-// 
-// 
-// 
-// 
+//  The program is working correctly
 //
 ////////////////////////////////////////////////////////////////////////
