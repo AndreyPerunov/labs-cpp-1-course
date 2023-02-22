@@ -10,80 +10,96 @@
 // Task formulation
 ////////////////////////////////////////////////////////////////////////
 //
-// Validate the input as a C++ identifier	
+// Reverse each line character-wise and concatenate them into a new string
 //
 ////////////////////////////////////////////////////////////////////////
 // Algorithm
 ////////////////////////////////////////////////////////////////////////
 //
+// Input: str
 // 
+// for i ∈ [0, str.length / 2 ) do
+//   swap(str[i], str[str.length - i - 1])
 // 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-//  
 ////////////////////////////////////////////////////////////////////////
 
 #include <iostream>
 #include <string>
-#include <regex>
 
 using namespace std;
 
+void reverseStr(string& str)
+{
+    for (int i = 0; i < str.length() / 2; i++)
+        swap(str[i], str[str.length() - i - 1]);
+}
+
 int main() {
-  string s;
+  string s1, s2;
   
-  cout << endl << "\033[1;36m-----------------------------------------------------------\033[0m" << endl;
-  cout << "\033[1;36mThis program validates the input as a C++ identifier.\033[0m" << endl;
-  cout << "\033[1;36m-----------------------------------------------------------\033[0m" << endl << endl;
+  cout << endl
+       << "\033[1;36m"
+       << "--------------------------------------------------------------"
+       << "\033[0m"
+       << endl;
+  cout << "\033[1;36m"
+       << "This program reverse two lines and join them in a new string."
+       << "\033[0m"
+       << endl;
+  cout << "\033[1;36m"
+       << "--------------------------------------------------------------"
+       << "\033[0m"
+       << endl << endl;
 
-  cout << "Enter the string: " << endl << endl ;
+  cout << "Enter two strings: " << endl << endl ;
 
-  getline(cin, s);
+  cout << "[1]: ";
+  getline(cin, s1);
+  cout << "[2]: ";
+  getline(cin, s2);
   cout << endl;
 
-  regex rules {"[a-zA-Z][a-zA-Z0-9_]*"};
+  reverseStr(s1);
+  reverseStr(s2);
 
-  if (regex_match(s, rules))
-    cout << "String '" << s << "' is valid C++ identifier." << endl << endl;
-  else {
-    cout << "String '" << s << "' is invalid C++ identifier." << endl << endl;
-  }    
+  string s1s2reversed = s2 + s1;
+
+  cout << "Reversed: " << s1s2reversed
+       << endl << endl; 
 }
 
 ////////////////////////////////////////////////////////////////////////
 // Testing
 ////////////////////////////////////////////////////////////////////////
 //
-// Case 1:
+// Case 1: two strings odd
+//   Input: Hello
+//          World
+//   Output: dlroWolleH
+//   Expected: dlroWolleH
+//   Result: PASS
+//
+// Case 2: two string even
+//   Input: Good
+//          Work
+//   Output: kroWdooG
+//   Expected: kroWdooG
+//   Result: PASS
+//
+// Case 3: empty input
 //   Input: 
 //   Output: 
 //   Expected: 
-//   Result: 
+//   Result: PASS
 //
-// Case 2: 
-//   Input: 
-//   Output: 
-//   Expected: 
-//   Result: 
+// Case 4: using space
+//   Input: Hello
+//           World
+//   Output:  dlroW olleH
+//   Expected: dlroW olleH
+//   Result: PASS
 //
-// Case 3: 
-//   Input: 
-//   Output: 
-//   Expected: 
-//   Result: 
-//
-// Case 4: 
-//   Input: 
-//   Output: 
-//   Expected: 
-//   Result: 
-//
-// Case 5: 
+// Case 5: Overflow
 //   Input: 
 //   Output: 
 //   Expected: 
