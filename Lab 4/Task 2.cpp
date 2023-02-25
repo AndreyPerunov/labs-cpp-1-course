@@ -10,7 +10,7 @@
 // Task formulation
 ////////////////////////////////////////////////////////////////////////
 //
-// return the shortest word in it (in sense of \w and \b regex classes)	
+// 
 //
 ////////////////////////////////////////////////////////////////////////
 // Algorithm
@@ -39,26 +39,7 @@ void getShortestWord(string s) {
 }
 
 int main() {
-  vector<string> sentences;
-  string s;    
-
-  cout << endl << "\033[1;36m-----------------------------------------------------------\033[0m" << endl;
-  cout << "\033[1;36mThis program finds the shortest words in the given strings.\033[0m" << endl;
-  cout << "\033[1;36m-----------------------------------------------------------\033[0m" << endl << endl;
-
-  cout << "Enter some strings (enter '\033[31mquit\033[0m' to end input): " << endl << endl ;
-
-  int count = 0;
-  while (s != "quit") {
-    cout << "[" << count << "]: ";
-    getline(cin, s);
-    sentences.push_back(s);
-    count++;
-  }
-
-  // ? That's cool program
-
-  getShortestWord(sentences[0]);
+  
 }
 
 ////////////////////////////////////////////////////////////////////////
