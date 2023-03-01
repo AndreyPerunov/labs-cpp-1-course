@@ -33,23 +33,27 @@ void reverseStr(string& str)
     for (int i = 0; i < str.length() / 2; i++)
         swap(str[i], str[str.length() - i - 1]);
 }
-     
-int main() {
-  string s1, s2;
-  
+
+void annonceTask(string task){
   cout << endl
        << "\033[1;36m"
        << "--------------------------------------------------------------"
        << "\033[0m"
        << endl;
   cout << "\033[1;36m"
-       << "This program reverse two lines and join them in a new string."
+       << task
        << "\033[0m"
        << endl;
   cout << "\033[1;36m"
        << "--------------------------------------------------------------"
        << "\033[0m"
        << endl << endl;
+}
+     
+int main() {
+  string s1, s2;
+  
+  annonceTask("This program reverse two lines and join them in a new string.");
 
   cout << "Enter two strings: " << endl << endl ;
 

@@ -41,23 +41,27 @@ void flipCase(string *s) {
   }
 }
 
-int main() {
-  vector<string> sentences;
-  string s;    
-
-   cout << endl
+void annonceTask(string task){
+  cout << endl
        << "\033[1;36m"
        << "--------------------------------------------------------------"
        << "\033[0m"
        << endl;
   cout << "\033[1;36m"
-       << "This program change the case of all the letters in it"
+       << task
        << "\033[0m"
        << endl;
   cout << "\033[1;36m"
        << "--------------------------------------------------------------"
        << "\033[0m"
        << endl << endl;
+}
+
+int main() {
+  vector<string> sentences;
+  string s;    
+
+  annonceTask("This program change the case of all the letters in it.");
 
   cout << "Enter some strings (enter '\033[31mquit\033[0m' to end input): "
        << endl << endl ;
