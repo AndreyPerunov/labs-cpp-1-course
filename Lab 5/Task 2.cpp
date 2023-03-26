@@ -59,11 +59,11 @@
 
 using namespace std;
 
-const string FILENAME = "computers.txt";
+const string FILENAME = "computers.bin";
 
 struct Computer {
-    char type[100];
-    int production_year;
+    char type[20];
+    int32_t production_year;
     float price;
 };
 
@@ -243,16 +243,16 @@ void writeDataOut(vector<Computer> computers, string filename) {
         << colored("Write data out", "magenta") << "                           |" << endl
         << "+---+------------------------------------------+" << endl;
 
-    ofstream file(filename);
+    ofstream file(filename, ios::binary);
     if (!file.is_open()) {
         cout << colored(("Error opening file " + filename + "!"), "red") << endl;
         return;
     }
 
     for (Computer computer : computers) {
-        file << computer.type << " "
-            << computer.production_year << " "
-            << computer.price << endl;
+        file.write(computer.type, sizeof(computer.type));
+        file.write((char*)&computer.production_year, sizeof(computer.production_year));
+        file.write((char*)&computer.price, sizeof(computer.price));
     }
 
     cout << "+---+----------------------------+" << endl
@@ -270,7 +270,7 @@ void readDataIn(vector<Computer>& computers, string filename) {
         << colored("Read data in", "cyan") << "                             |" << endl
         << "+---+------------------------------------------+" << endl;
 
-    ifstream file(filename);
+    ifstream file(filename, ios::binary);
     if (!file.is_open()) {
         cout << colored(("Error opening file " + filename + "!"), "red") << endl;
         return;
@@ -278,9 +278,10 @@ void readDataIn(vector<Computer>& computers, string filename) {
 
     Computer computer;
     computers.clear();
-    while (file >> computer.type
-        >> computer.production_year
-        >> computer.price) {
+    while (file.peek() != EOF) {
+        file.read(computer.type, sizeof(computer.type));
+        file.read((char*)&computer.production_year, sizeof(computer.production_year));
+        file.read((char*)&computer.price, sizeof(computer.price));
         computers.push_back(computer);
     }
     if (computers.size() == 0)
@@ -330,7 +331,7 @@ int main() {
             break;
         case 'W':
         case 'w':
-            writeDataOut(computers, "computers.txt");
+            writeDataOut(computers, FILENAME);
             isSaved = true;
             break;
         case 'R':
