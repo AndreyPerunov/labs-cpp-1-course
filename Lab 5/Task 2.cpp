@@ -19,37 +19,186 @@
 // , reading data in, writing data out and quitting.
 //
 ////////////////////////////////////////////////////////////////////////
-// Algorithm: Data input
+// Algorithm: addNewComputer
 ////////////////////////////////////////////////////////////////////////
 // 
+// Input: computers, computer
 // 
+//  vector computer
 // 
+//  get computer.type
+//  get computer.production_year
+//  get computer.price
 // 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-////////////////////////////////////////////////////////////////////////
-// Algorithm: Task
-////////////////////////////////////////////////////////////////////////
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
+//  computers.push_back(computer)
 // 
 ////////////////////////////////////////////////////////////////////////
-
+// Algorithm: ptintAllComputers
+////////////////////////////////////////////////////////////////////////
+// 
+// Input: computers
+// Output: computers
+// 
+// count <- 0
+// 
+// if computers.size = 0
+//  print("There is no computers!")°
+//  return
+// 
+// for each computer in computers do
+//  print("Computer number [" + count + "]: ")
+//  print(computer)
+//  count <- count + 1
+// 
+// print(count + " computers were printed.")
+// 
+////////////////////////////////////////////////////////////////////////
+// Algorithm: computerWithTypeExists
+////////////////////////////////////////////////////////////////////////
+// 
+// Input: computers, type
+// Output: bool-value
+// 
+// for each computer in computers do
+//  if computer.type = type
+//    return true
+// 
+// return false
+// 
+////////////////////////////////////////////////////////////////////////
+// Algorithm: findCheapestComputersByType
+////////////////////////////////////////////////////////////////////////
+// 
+// Input: computers, type
+// Output: computers
+// 
+// get type
+// 
+// if computers.size = 0
+//  print("There is no computers!")°
+//  return
+//
+// if not computerWithTypeExists(computers, type) do
+//  print("There is no computers by given type!")
+//  return 
+// 
+// price <- computers[0].price
+// for each computer in computers do
+//  if computer.type = type do 
+//   if computer.price < price
+//    price <- computer.price
+// 
+// count <- 0
+// for each computer in computers do
+//  if computer.type = type do
+//   if computer.price = price
+//    print("Computer number [" + count + "]: ")
+//    print(computer)
+//  count <- count + 1
+// 
+////////////////////////////////////////////////////////////////////////
+// Algorithm: writeDataOut
+////////////////////////////////////////////////////////////////////////
+// 
+// Input: computers, filename
+// Output: file
+// 
+// open file with filename in binary mode
+// if file is not open do
+//  print("Error opening file " + filename + "!")
+//  return
+// 
+// for each computer in computers do
+//  write computer.type to the file
+//  write computer.production_year to the file
+//  write computer.price to the file
+// 
+// print(computers.size + " computers were writed.")
+// 
+// close the file
+// 
+////////////////////////////////////////////////////////////////////////
+// Algorithm: readDataIn
+////////////////////////////////////////////////////////////////////////
+// 
+// Input: computers, filename
+// Output: computers
+// 
+// open file with filename in binary mode
+// if file is not open do
+//  print("Error opening file " + filename + "!")
+//  return
+// 
+// computer
+// computers.clear
+// while it is not the end of the file do
+//  read computer.type from the file
+//  read computer.production_year from the file
+//  read computer.price from the file
+//  computers.push_back(computer)
+// 
+// if computers.size = 0 do 
+//  print("File " + filename + " is empty!")
+// 
+// print(computers.size + " computers were readed.")
+// 
+// close the file
+// 
+////////////////////////////////////////////////////////////////////////
+// Algorithm: main
+////////////////////////////////////////////////////////////////////////
+// 
+// Input: choice
+// 
+// computers
+// isSaved <- true
+// choice
+// 
+// do
+//  printMenu
+//  get choice
+//  
+//  if choice = q
+//   break
+//  
+//  switch choice
+//   case 'A' and 'a' do
+//    addNewComputer(computers)
+//    isSaved <- false
+//    brake
+//   case 'p' and 'P' do
+//    printAllComputers(computers)
+//    break
+//   case 'o' and 'O' do
+//    findCheapestComputersByType(computers)
+//    break
+//   case 'w' and 'W' do
+//    writeDataOut(computers, FILENAME)
+//    break
+//   case 'r' and 'R' do
+//    if not isSaved do
+//     print("You did not write data out!")
+//     print("Cancel?")
+//     get choice
+//     if choice = 'y' do
+//      break
+//     if choice = 'n' do
+//      readDataIn(computers, FILENAME)
+//      isSaved <- true
+//     else do
+//      print("Wrong input!")
+//      print("Action was canceled!")
+//      break
+//    else do
+//     readDataIn(computers, FILENAME)
+//     isSaved <- true
+//    break
+//   default do
+//    print("Unknown command!")
+//    break
+// while choice != 'q' or choice != 'Q'
+// 
+////////////////////////////////////////////////////////////////////////
 
 #include <iostream>
 #include <vector>
@@ -192,12 +341,13 @@ bool computerWithTypeExists(vector<Computer> computers, char type[100]) {
     return false;
 }
 
-void findCheapestComputersByType(vector<Computer> computers, char type[100]) {
+void findCheapestComputersByType(vector<Computer> computers) {
     cout << "+---+------------------------------------------+" << endl
         << "| " << colored("O", "blue") << " | "
         << colored("Find the cheapest COMPUTER by given type", "blue")
         << " |" << endl
         << "+---+------------------------------------------+" << endl;
+    char type[20];
     cout << colored("[type]: ", "blue");
     cin >> type;
     cout << "----------------------------------------------------------"
@@ -298,7 +448,6 @@ void readDataIn(vector<Computer>& computers, string filename) {
 int main() {
     vector<Computer> computers;
     bool isSaved = true;
-    char type[100];
     char choice;
 
     hi("Welcome to COMPUTERS database.");
@@ -311,7 +460,7 @@ int main() {
         cout << endl;
 
 
-        if (choice == 'q')
+        if (choice == 'q' || choice == 'Q')
             break;
 
         switch (choice)
@@ -327,7 +476,7 @@ int main() {
             break;
         case 'O':
         case 'o':
-            findCheapestComputersByType(computers, type);
+            findCheapestComputersByType(computers);
             break;
         case 'W':
         case 'w':
@@ -372,45 +521,20 @@ int main() {
 }
 
 ////////////////////////////////////////////////////////////////////////
-// Testing
+// Testing: menu
 ////////////////////////////////////////////////////////////////////////
-//?
-//? Case 1: Normal Input
-//?   Input: laptop 2003 99.99 quit laptop
-//?   Output: laptop 2003 99.99
-//?   Expected: laptop 2003 99.99
-//?   Result: PASS
-//? 
-//? Case 2: No Input
-//?   Input: quit quit
-//?   Output:
-//?   Expected:
-//?   Result: PASS
-//?
-//? Case 3: Overflow
-//?   Input: laptop 9999999999999999999999999999999999
-//?   Output: infinite cout
-//?   Expected: error
-//?   Result: FAIL
-//? 
-//? Case 4: Non numeric input
-//?   Input: laptop hello
-//?   Output: infinite cout
-//?   Expected: error
-//?   Result: FAIL
-//? 
-//? Case 5: Not matching type 
-//?   Input: laptop 2003 99.99 quit pc
-//?   Output: 
-//?   Expected: 
-//?   Result: PASS
-//? 
-//? Case 6: Multiple matching types 
-//?   Input: laptop 2003 99.99 pc 2013 23.45 laptop 2001 99.99 laptop 2019 999.99 quit laptop
-//?   Output: laptop 2003 99.99 laptop 2001 99.99
-//?   Expected: laptop 2003 99.99 laptop 2001 99.99
-//?   Result: PASS
-//? 
+// 
+// Case 1: q
+//   Input: q
+//   Output: Program ended
+//   Expected: Program ended
+//   Result: PASS
+// 
+// 
+// 
+// 
+// 
+// 
 ////////////////////////////////////////////////////////////////////////
 // Concluding remarks
 ////////////////////////////////////////////////////////////////////////
