@@ -82,7 +82,12 @@
 //  print("There is no computers by given type!")
 //  return 
 // 
-// price <- computers[0].price
+// price
+// for each computer in computers do
+//  if computer.type = type do 
+//   price <- computer.price
+//   break
+// 
 // for each computer in computers do
 //  if computer.type = type do 
 //   if computer.price < price
@@ -364,12 +369,22 @@ void findCheapestComputersByType(vector<Computer> computers) {
         return;
     }
 
-    float price = computers[0].price;
+    // Get the price of the first computer by a given type
+    float price;
+    for (Computer computer : computers) {
+        if (strcmp(computer.type, type) == 0) {
+            price = computer.price;
+            break;
+        }
+    }
+
+    // Find the cheapest price
     for (Computer computer : computers)
         if (strcmp(computer.type, type) == 0)
             if (computer.price < price)
                 price = computer.price;
 
+    // Output cheapest computers
     int count = 0;
     for (Computer computer : computers) {
         if (strcmp(computer.type, type) == 0) {
@@ -455,10 +470,9 @@ int main() {
     do
     {
         printMenu();
-        cout << "What woud you like to do?" << endl;
+        cout << "What would you like to do?" << endl;
         cin >> choice;
         cout << endl;
-
 
         if (choice == 'q' || choice == 'Q')
             break;
@@ -489,16 +503,16 @@ int main() {
                 cout << colored("You did not write data out!", "red") << endl;
                 cout << "If you read data in, computers that you have added will be "
                     << colored("deleted", "red") << "!" << endl;
-                cout << "Do you want cancel this action? (y - yes, n - no)" << endl;
+                cout << "Do you want to continue? (y - yes, n - no)" << endl;
                 cin >> choice;
                 if (choice == 'y') {
                     cout << endl;
-                    break;
-                }
-                if (choice == 'n') {
-                    cout << endl;
                     readDataIn(computers, FILENAME);
                     isSaved = true;
+                }
+                else if (choice == 'n') {
+                    cout << endl;
+                    break;
                 }
                 else {
                     cout << colored("Wrong input!", "red") << endl;
@@ -530,10 +544,150 @@ int main() {
 //   Expected: Program ended
 //   Result: PASS
 // 
+// Case 2: Q
+//   Input: Q
+//   Output: Program ended
+//   Expected: Program ended
+//   Result: PASS
 // 
+// Case 3: Wrong input
+//   Input: B
+//   Output: Unknown command!
+//   Expected: Unknown command!
+//   Result: PASS
 // 
+// Case 4: Multiple chars
+//   Input: AA
+//   Output: addNewComputer run and get second char as an input
+//   Expected: addNewComputer run
+//   Result: FAIL
 // 
+// Case 5: int
+//   Input: 65
+//   Output: Unknown command!
+//   Expected: Unknown command!
+//   Result: PASS
 // 
+// Case 6: Option R, isSaved = true
+//   Input: r
+//   Output: readDataIn run
+//   Expected: readDataIn run
+//   Result: PASS
+// 
+// Case 7: Option R, isSaved = false, continue? - y
+//   Input: a pc 2003 99.99 r y
+//   Output: readDataIn run
+//   Expected: readDataIn run
+//   Result: PASS
+// 
+// Case 8: Option R, isSaved = false, continue? - n
+//   Input: a pc 2003 99.99 r n
+//   Output: readDataIn didn't run
+//   Expected: readDataIn didn't run
+//   Result: PASS
+// 
+// Case 9: Option R, isSaved = false, continue? - wrong input
+//   Input: a pc 2003 99.99 r k
+//   Output: Wrong input! readDataIn didn't run
+//   Expected: Wrong input! readDataIn didn't run
+//   Result: PASS
+// 
+////////////////////////////////////////////////////////////////////////
+// Testing: addNewComputer
+////////////////////////////////////////////////////////////////////////
+// 
+// Case 1: non numerical input
+//   Input: pc nineties one
+//   Output: Infinite menu output
+//   Expected: Error
+//   Result: FAIL
+// 
+// Case 2: correct input
+//   Input: pc 2003 99.99
+//   Output: computer added to the vector
+//   Expected: computer added to the vector
+//   Result: PASS
+// 
+// Case 3: add computer after read file
+//   Input: pc 2003 99.99
+//   Output: computer added to the end of the vector
+//   Expected: computer added to the end of the vector
+//   Result: PASS
+// 
+// Case 4: type using space
+//   Input: personal computer 2003 99.99
+//   Output: Infinite menu output
+//   Expected: Error
+//   Result: FAIL
+// 
+////////////////////////////////////////////////////////////////////////
+// Testing: printAllComputers
+////////////////////////////////////////////////////////////////////////
+// 
+// Case 1: computers vector is empty
+//   Output: Error
+//   Expected: Error
+//   Result: PASS
+// 
+// Case 2: computers vector is not empty
+//   Output: printed all computers
+//   Expected: printed all computers
+//   Result: PASS
+// 
+////////////////////////////////////////////////////////////////////////
+// Testing: findCheapestComputersByType
+////////////////////////////////////////////////////////////////////////
+// 
+// Case 1: type exists, single cheapest computer
+//   Input: pc
+//   Output: pc 2222 22
+//   Expected: pc 2222 22
+//   Result: PASS
+// 
+// Case 2: type exists, multiple cheapest computer
+//   Input: laptop
+//   Output: laptop 9999 99 laptop 2000 99
+//   Expected: laptop 9999 99 laptop 2000 99
+//   Result: PASS
+// 
+// Case 3: type does not exists
+//   Input: andriod
+//   Output: There is no computers by given type!
+//   Expected: There is no computers by given type!
+//   Result: PASS
+// 
+////////////////////////////////////////////////////////////////////////
+// Testing: writeDataOut
+////////////////////////////////////////////////////////////////////////
+//
+// Case 1: file does not exists
+//   Output: created a file
+//   Expected: created a file
+//   Result: PASS
+// 
+// Case 2: file exists
+//   Output: rewrite existing file
+//   Expected: rewrite existing file
+//   Result: PASS
+// 
+////////////////////////////////////////////////////////////////////////
+// Testing: readDataIn
+////////////////////////////////////////////////////////////////////////
+//
+// Case 1: file does not exists
+//   Output: error
+//   Expected: error
+//   Result: PASS
+// 
+// Case 2: file exists but empty
+//   Output: nothing is read
+//   Expected: nothing is read
+//   Result: PASS
+// 
+// Case 3: file exists
+//   Output: 3 computers were readed
+//   Expected: 3 computers were readed
+//   Result: PASS
 // 
 ////////////////////////////////////////////////////////////////////////
 // Concluding remarks
