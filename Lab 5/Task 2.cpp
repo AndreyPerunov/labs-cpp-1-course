@@ -531,6 +531,7 @@ int main() {
             break;
         }
     } while (choice != 'q' || choice != 'Q');
+    cout << colored("Goodbye, have a nice day!", "green") << endl;
     return 0;
 }
 
